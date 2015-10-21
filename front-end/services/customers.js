@@ -29,24 +29,42 @@
     }
 
     function createCustomer(customerDetails, callback) {
-      $http.post('/customers', customerDetails).then(function(response) {
-        console.log('$http post callback');
-        callback(null);
-      });
+      $http.post('/customers', customerDetails).then(
+        function(response) {
+          console.log('$http post callback');
+          callback(null);
+        },
+        function(response) {
+          console.log(response);
+          callback(response);
+        }
+      );
     }
 
     function updateCustomer(customerDetails, callback) {
-      $http.put('/customers/' + customerDetails._id, customerDetails).then(function(response) {
-        console.log('$http put callback');
-        callback(null);
-      });
+      $http.put('/customers/' + customerDetails._id, customerDetails).then(
+        function(response) {
+          console.log('$http put callback');
+          callback(null);
+        },
+        function(response) {
+          console.log(response);
+          callback(response);
+        }
+      );
     }
 
     function deleteCustomer(customerDetails, callback) {
-      $http.delete('/customers/' + customerDetails._id).then(function(response) {
-        console.log('$http delete callback');
-        callback(null);
-      });
+      $http.delete('/customers/' + customerDetails._id).then(
+        function(response) {
+          console.log('$http delete callback');
+          callback(null);
+        },
+        function(response) {
+          console.log(response);
+          callback(response);
+        }
+      );
     }
 
     return {
