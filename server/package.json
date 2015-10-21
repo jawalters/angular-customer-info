@@ -1,0 +1,19 @@
+{
+  "name": "customerInfoServer",
+  "version": "0.0.1",
+  "description": "Webserver for Customer Info web interface",
+  "author": {
+    "name": "jwalters",
+    "url": "https://github.com/jawalters/angular-customer-info"
+  },
+  "private": true,
+  "main": "app.js",
+  "scripts": {},
+  "dependencies": {
+    "async": "^1.4.2",
+    "body-parser": "^1.14.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.1.11"
+  }
+}

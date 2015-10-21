@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="customerInfo">
+
+  <head>
+    <title>Customer Information</title>
+    <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.6/angular-route.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <nav class="container navbar navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#/main">Home</a></li>
+              <li><a href="#/login">Login</a></li>
+              <li><a href="#/customers">Customers</a></li>
+              <li><a href="#/contactUs">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <section>
+        <div ng-view></div>
+      </section>
+
+      <footer>
+        <p>
+          Imaginary Company</br>
+          123 Nowhere St.</br>
+          Nowhere, TX  75555</br>
+          Phone: 555 555-5555</br>
+        </p>
+      </footer>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="services/customers.js"></script>
+    <script src="controllers/CustomersController.js"></script>
+    <script src="controllers/CustomerDetailsController.js"></script>
+  </body>
+
+</html>

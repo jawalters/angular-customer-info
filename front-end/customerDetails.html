@@ -1,0 +1,83 @@
+<div>
+  <p>Details for {{ customerDetails.firstName }} {{ customerDetails.lastName }}</p>
+
+  <form name="customerForm" ng-submit="createOrUpdateCustomer(customerDetails)">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>First Name</td>
+          <td>
+            <input type="text" id="inputFirstName" class="form-control" placeholder="First Name" required="" ng-model="customerDetails.firstName">
+          </td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td>
+            <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" required="" ng-model="customerDetails.lastName">
+          </td>
+        </tr>
+        <tr>
+          <td>Company</td>
+          <td>
+            <input type="text" id="inputCompany" class="form-control" placeholder="Company" required="" ng-model="customerDetails.company">
+          </td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>
+            <input type="text" id="inputAddress" class="form-control" placeholder="Address" required="" ng-model="customerDetails.address">
+          </td>
+        </tr>
+        <tr>
+          <td>City</td>
+          <td>
+            <input type="text" id="inputCity" class="form-control" placeholder="City" required="" ng-model="customerDetails.city">
+          </td>
+        </tr>
+        <tr>
+          <td>State</td>
+          <td>
+            <input type="text" id="inputState" class="form-control" placeholder="State" required="" ng-model="customerDetails.state">
+          </td>
+        </tr>
+        <tr>
+          <td>Zip Code</td>
+          <td>
+            <input type="text" id="inputZip" class="form-control" placeholder="Zip Code" required="" ng-model="customerDetails.zip">
+          </td>
+        </tr>
+        <tr>
+          <td>Phone Number</td>
+          <td>
+            <input type="text" id="inputPhone" class="form-control" placeholder="Phone" required="" ng-model="customerDetails.phone">
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" ng-model="customerDetails.email">
+          </td>
+        </tr>
+        <tr>
+          <td>Domain</td>
+          <td>
+            <input type="text" id="inputDomain" class="form-control" placeholder="Domain" required="" ng-model="customerDetails.domain">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="customer-details-save-button">
+      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Save" />
+    </div>
+  </form>
+
+  <div class="customer-details-delete-button">
+    <input class="btn btn-md btn-primary btn-block" type="submit" value="Delete" ng-click="deleteCustomer(customerDetails)" />
+  </div>
+</div>
