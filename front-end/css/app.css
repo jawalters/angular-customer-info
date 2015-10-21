@@ -70,6 +70,21 @@ table {
   border-spacing: 50px 0;
 }
 
+.customer-details {
+  font-family: "Open Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #435171;
+}
+
+.customer-details-text {
+  padding-top: 1px;
+  padding-left: 13px;
+}
+
+.customer-details-table td {
+  height: 50px;
+}
+
 .mainlogo {
   display: block;
   margin: 0 auto;
@@ -85,11 +100,6 @@ table {
   margin: 0 auto;
 }
 
-.form-control {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .customer-list {
   text-align: center;
   font-family: "Open Sans", "Segoe UI", Arial, Helvetica, sans-serif;
@@ -98,16 +108,28 @@ table {
   padding-top: 20px;
 }
 
-.customer-details-save-button {
-  max-width: 250px;
-  margin: 0 auto;
-  padding-top: 20px;
+.customer-detail-cell {
+  min-width: 250px;
 }
 
-.customer-details-delete-button {
-  max-width: 250px;
-  margin: 0 auto;
-  padding-top: 20px;
+.customer-details-button-div {
+  padding: 15px;
+}
+
+#customer-details-edit-button-div, #customer-details-save-button-div {
+  text-align: right;
+}
+
+#customer-details-cancel-button-div {
+  text-align: center;
+}
+
+#customer-details-delete-button-div {
+  text-align: left;
+}
+
+.customer-details-button {
+  min-width: 100px;
 }
 
 footer {

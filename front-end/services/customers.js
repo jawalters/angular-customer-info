@@ -13,7 +13,7 @@
           customers = response.data;
           callback(null, customers);
         });
-      }      
+      }
     }
 
     function getCustomer(customerName, callback) {
@@ -32,6 +32,7 @@
       $http.post('/customers', customerDetails).then(
         function(response) {
           console.log('$http post callback');
+          customers = null;
           callback(null);
         },
         function(response) {
@@ -45,6 +46,7 @@
       $http.put('/customers/' + customerDetails._id, customerDetails).then(
         function(response) {
           console.log('$http put callback');
+          customers = null;
           callback(null);
         },
         function(response) {
@@ -58,6 +60,7 @@
       $http.delete('/customers/' + customerDetails._id).then(
         function(response) {
           console.log('$http delete callback');
+          customers = null;
           callback(null);
         },
         function(response) {

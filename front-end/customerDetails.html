@@ -1,8 +1,8 @@
 <div>
   <p>Details for {{ customerDetails.firstName }} {{ customerDetails.lastName }}</p>
 
-  <form name="customerForm" ng-submit="createOrUpdateCustomer(customerDetails)">
-    <table>
+  <form name="customerForm">
+    <table class="customer-details-table">
       <thead>
         <tr>
           <th></th>
@@ -12,72 +12,132 @@
       <tbody>
         <tr>
           <td>First Name</td>
-          <td>
-            <input type="text" id="inputFirstName" class="form-control" placeholder="First Name" required="" ng-model="customerDetails.firstName">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.firstName }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputFirstName" class="form-control customer-details" placeholder="First Name" required="" ng-model="customerDetails.firstName">
+            </div>
           </td>
         </tr>
         <tr>
           <td>Last Name</td>
-          <td>
-            <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" required="" ng-model="customerDetails.lastName">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.lastName }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputLastName" class="form-control customer-details" placeholder="Last Name" required="" ng-model="customerDetails.lastName">
+            </div>
           </td>
         </tr>
         <tr>
           <td>Company</td>
-          <td>
-            <input type="text" id="inputCompany" class="form-control" placeholder="Company" required="" ng-model="customerDetails.company">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.company }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputCompany" class="form-control customer-details" placeholder="Company" required="" ng-model="customerDetails.company">
+            </div>
           </td>
         </tr>
         <tr>
           <td>Address</td>
-          <td>
-            <input type="text" id="inputAddress" class="form-control" placeholder="Address" required="" ng-model="customerDetails.address">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.address }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputAddress" class="form-control customer-details" placeholder="Address" required="" ng-model="customerDetails.address">
+            </div>
           </td>
         </tr>
         <tr>
           <td>City</td>
-          <td>
-            <input type="text" id="inputCity" class="form-control" placeholder="City" required="" ng-model="customerDetails.city">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.city }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputCity" class="form-control customer-details" placeholder="City" required="" ng-model="customerDetails.city">
+            </div>
           </td>
         </tr>
         <tr>
           <td>State</td>
-          <td>
-            <input type="text" id="inputState" class="form-control" placeholder="State" required="" ng-model="customerDetails.state">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.state }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputState" class="form-control customer-details" placeholder="State" required="" ng-model="customerDetails.state">
+            </div>
           </td>
         </tr>
         <tr>
           <td>Zip Code</td>
-          <td>
-            <input type="text" id="inputZip" class="form-control" placeholder="Zip Code" required="" ng-model="customerDetails.zip">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.zip }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputZip" class="form-control customer-details" placeholder="Zip Code" required="" ng-model="customerDetails.zip">
+            </div>
           </td>
         </tr>
         <tr>
           <td>Phone Number</td>
-          <td>
-            <input type="text" id="inputPhone" class="form-control" placeholder="Phone" required="" ng-model="customerDetails.phone">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.phone }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputPhone" class="form-control customer-details" placeholder="Phone" required="" ng-model="customerDetails.phone">
+            </div>
           </td>
         </tr>
         <tr>
           <td>Email</td>
-          <td>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" ng-model="customerDetails.email">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.email }}
+            </div>
+            <div ng-show="editMode">
+              <input type="email" id="inputEmail" class="form-control customer-details" placeholder="Email" required="" ng-model="customerDetails.email">
+            </div>
           </td>
         </tr>
         <tr>
           <td>Domain</td>
-          <td>
-            <input type="text" id="inputDomain" class="form-control" placeholder="Domain" required="" ng-model="customerDetails.domain">
+          <td class="customer-detail-cell">
+            <div ng-hide="editMode" class="customer-details customer-details-text">
+              {{ customerDetails.domain }}
+            </div>
+            <div ng-show="editMode">
+              <input type="text" id="inputDomain" class="form-control customer-details" placeholder="Domain" required="" ng-model="customerDetails.domain">
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="customer-details-save-button">
-      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Save" />
-    </div>
   </form>
 
-  <div class="customer-details-delete-button">
-    <input class="btn btn-md btn-primary btn-block" type="submit" value="Delete" ng-click="deleteCustomer(customerDetails)" />
+  <div class="row">
+    <div class="customer-details-button-div col-sm-4" id="customer-details-save-button-div" ng-show="editMode">
+      <input class="btn btn-primary customer-details-button" type="submit" value="Save" ng-click="createOrUpdateCustomer(customerDetails)"/>
+    </div>
+    <div class="customer-details-button-div col-sm-4" id="customer-details-edit-button-div" ng-hide="editMode">
+      <input class="btn btn-primary customer-details-button" type="submit" value="Edit" ng-click="editCustomer()" />
+    </div>
+
+    <div class="customer-details-button-div col-sm-4" id="customer-details-cancel-button-div">
+      <input class="btn btn-default customer-details-button" type="submit" value="Cancel"  ng-show="editMode" ng-click="cancel()" />
+    </div>
+
+    <div class="customer-details-button-div col-sm-4" id="customer-details-delete-button-div">
+      <input class="btn btn-danger customer-details-button" type="submit" value="Delete" ng-click="deleteCustomer(customerDetails)" />
+    </div>
   </div>
 </div>
