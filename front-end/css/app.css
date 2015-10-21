@@ -95,8 +95,13 @@ table {
   margin: 0 auto;
 }
 
+.login-control {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .create-customer-btn {
-  max-width: 300px;
+  max-width: 200px;
   margin: 0 auto;
 }
 

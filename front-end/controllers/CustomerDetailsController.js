@@ -71,7 +71,11 @@
     }
 
     $scope.cancel = function() {
-      $route.reload();
+      if ($routeParams.customerName === 'NewCustomer') {
+        $location.path('/customers');
+      } else {
+        $route.reload();
+      }
     }
   }
 
