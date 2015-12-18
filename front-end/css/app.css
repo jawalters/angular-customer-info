@@ -105,12 +105,22 @@ table {
   margin: 0 auto;
 }
 
+.customer-list-div {
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+
 .customer-list {
-  text-align: center;
   font-family: "Open Sans", "Segoe UI", Arial, Helvetica, sans-serif;
   font-size: 15px;
   color: #435171;
   padding-top: 20px;
+}
+
+.ng-hide:not(.ng-hide-animate) {
+  display: inline !important;
+  visibility: hidden;
 }
 
 .customer-detail-cell {

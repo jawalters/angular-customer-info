@@ -1,6 +1,39 @@
 (function() {
-  function customers($http) {
+  function customers($http, $route, websocket) {
     var customers = null;
+
+    function applyStatusUpdateItem(updateItem) {
+      for (var i = 0; i < customers.length; ++i) {
+        if ((customers[i].firstName === updateItem.firstName) &&
+            (customers[i].lastName === updateItem.lastName)) {
+          customers[i].locationId = updateItem.locationId;
+        }
+      }
+    }
+
+    function statusUpdate(update) {
+      if (Array.isArray(update)) {
+        update.forEach(function(element) {
+          applyStatusUpdateItem(element.new_val);
+        });
+      } else {
+        applyStatusUpdateItem(update.new_val);
+      }
+
+      $route.reload();
+    }
+
+    function initializeStatuses(statuses, callback) {
+      if (Array.isArray(statuses)) {
+        statuses.forEach(applyStatusUpdateItem);
+      } else {
+        applyStatusUpdateItem(statuses);
+      }
+
+      $route.reload();
+    }
+
+    websocket.subscribeToChannel('userStatus', statusUpdate);
 
     function getCustomers(callback) {
       console.log('getCustomers', customers);
@@ -11,7 +44,12 @@
         $http.get('/customers').then(function(response) {
           console.log('$http callback', response);
           customers = response.data;
-          callback(null, customers);
+
+          $http.get('/statuses').then(function(response) {
+            initializeStatuses(response.data, function() {
+              callback(null, customers);
+            });
+          });
         });
       }
     }

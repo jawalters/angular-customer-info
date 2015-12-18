@@ -3,9 +3,95 @@ var cors = require('cors');
 var mongoose = require('mongoose');
 var async = require('async');
 var bodyParser = require('body-parser');
+var io = require('socket.io')();
+var http = require('http');
+var r = require('rethinkdb');
 
 var cfgProxyPort = 59000;
 var cfgProxyHost = '0.0.0.0';
+
+var server;
+var sockerIOServer;
+
+var rethinkConn = null;
+
+function connectToRethink(callback) {
+  r.connect(
+    { host: cfgProxyHost, port: 28015 },
+    function(err, conn) {
+      if (err) {
+        callback(err);
+      } else {
+        rethinkConn = conn;
+        callback(null);
+      }
+    }
+  );
+}
+
+function startRethinkChangefeed(tableName, callback) {
+  r.table(tableName).changes().run(rethinkConn, function(err, cursor) {
+    if (err) {
+      callback(err);
+    } else {
+      cursor.each(function(err, row) {
+        if (err) {
+          console.log(err);
+        } else {
+          socketIOServer.emit('userStatus', row);
+        }
+      });
+
+      callback(null);
+    }
+  });
+}
+
+function getData(tableName, callback) {
+  r.table(tableName).run(rethinkConn, function(err, cursor) {
+    if (err) {
+      callback(err);
+    } else {
+      cursor.toArray(function(err, result) {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, result);
+        }
+      });
+    }
+  });
+}
+
+function startSocketIO(callback) {
+  console.log('Starting Socket.IO server');
+
+  io.origins('*:*');
+
+  socketIOServer = io.listen(server);
+
+  socketIOServer.on('disconnect', function(socket) {
+    console.log('socket.io server disconnect ', socket);
+  });
+
+  socketIOServer.on('connection', function(socket) {
+    console.log('new socket.io client %s connection', socket.id);
+
+    socket.join('userStatus');
+
+    socket.on('disconnect', function() {
+      console.log('socket.io client disconnected %s', socket.id);
+
+      connectedSocket = null;
+    });
+
+    socket.on('message', function(msg) {
+      console.log('new socket.io message received: ', msg);
+    });
+  });
+
+  callback(null);
+}
 
 function startMongoDb(callback) {
   var options = {
@@ -184,13 +270,24 @@ function startExpress(callback) {
     deleteCustomer(req, res);
   });
 
+  app.get('/statuses', function(req, res) {
+    getData('userStatuses', function(err, results) {
+      if (err) {
+        res.statusCode = 500;
+        res.end();
+      } else {
+        res.json(results);
+      }
+    });
+  });
+
   app.use(function(req, res) {
     console.log('invalid resource', req.method, req.url);
     res.statusCode = 404;
     res.end();
   });
 
-  app.listen(cfgProxyPort, cfgProxyHost, function() {
+  server = http.createServer(app).listen(cfgProxyPort, cfgProxyHost, function() {
     console.log('listening on port ' + cfgProxyPort);
     callback(null);
   });
@@ -207,7 +304,21 @@ function startExpress(callback) {
       },
       function(seriesCallback) {
         startExpress(seriesCallback);
+      },
+      function(seriesCallback) {
+        connectToRethink(seriesCallback);
+      },
+      function(seriesCallback) {
+        startRethinkChangefeed('userStatuses', seriesCallback);
+      },
+      function(seriesCallback) {
+        startSocketIO(seriesCallback);
       }
-    ]
+    ],
+    function(err) {
+      if (err) {
+        console.log(err);
+      }
+    }
   );
 }());
